@@ -1,0 +1,51 @@
+﻿@model MvcPot.Models.FeedbackViewModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Page</title>
+    <!-- custom-theme -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Feedback, Bootstrap" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //custom-theme -->
+    <link href="~/Content/styleFeedback.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+</head>
+<body class="agileits_w3layouts">
+    <h1 class="agile_head text-center">Feedbacks are Welcome</h1>
+    <div class="w3layouts_main wrap">
+        <h3>Bana bu projeyi geliştirmemde yorumlarınızla yardımcı olabilirsiniz! </h3>
+        @using (Html.BeginForm("Create", "Feedback", FormMethod.Post, new { @class = "agile_form" }))
+        {
+            <ul class="agile_info_select">
+                @for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <li>
+                        @Html.RadioButtonFor(m => Model.Select, Model.Answers[i].Id, new { @id = i })
+                        <label for="@i"> @Model.Answers[i].Name</label>
+                        <div class="@Model.Answers[i].Css"></div>
+                    </li>
+                }
+            </ul>
+            <h2>Bu projeyi nasıl buldunuz?</h2>
+            <h2>Eğer özel bir mesaj iletmek isterseniz</h2>
+
+            @Html.TextAreaFor(m => m.Comment, new { @class = "w3l_summary", @placeholder = "Lütfen mesajınızı giriniz!" })
+            @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Ad Soyad" })
+            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email Adresiniz" })
+            <input type="submit" value="send" class="agileinfo" />
+        }
+    </div>
+</body>
+
+</html>
+
+
